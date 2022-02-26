@@ -23,5 +23,8 @@ namespace MyntraClone.Models
         public DateTime UpdatedAt { get; set; }
         public int? OrderId { get; set; }
         public string Size { get; set; }
+        public string orderStatus { get; set; }
+        public virtual Order order { get; set; }
+        public virtual Product product { get; set; }
     }
 }

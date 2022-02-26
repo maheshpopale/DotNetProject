@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyntraClone.Models;
 using System;
@@ -15,10 +16,16 @@ namespace MyntraClone.Controllers
         ProductsRepository _repository = new ProductsRepository();
 
         [HttpGet]
+        //[Authorize]
         public IEnumerable<Product> Get()
         {
             return _repository.getProducts().ToList();
 
+        }
+        [HttpGet("{id}")]
+        public Product getProductById(int id)
+        {
+            return _repository.getProductById(id);
         }
         [HttpPost]
         public IActionResult Create([FromBody] Product product)

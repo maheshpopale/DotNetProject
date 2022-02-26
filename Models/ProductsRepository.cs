@@ -16,6 +16,10 @@ namespace MyntraClone.Models
             var products = context.Products.ToList();
             return products;
         }
+        public Product getProductById(int id)
+        {
+           return context.Products.FirstOrDefault(product => product.Id == id);
+        }
         public void AddProduct(Product product)
         {
             context.Products.Add(product);
