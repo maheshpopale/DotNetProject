@@ -1,34 +1,32 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyntraClone.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-    
+
 namespace MyntraClone.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
-        ProductsRepository _repository = new ProductsRepository();
-
+        CategoriesRepository _repository = new CategoriesRepository();
         [HttpGet]
-        //[Authorize]
-        public IEnumerable<Product> Get()
+        public IEnumerable<Category> Get()
         {
-            return _repository.getProducts().ToList();
+            return _repository.getCategories().ToList();
+        }
 
-        }
+        //get Category by ID
         [HttpGet("{id}")]
-        public Product getProductById(int id)
+        public Category getProductById(int id)
         {
-            return _repository.getProductById(id);
+            return _repository.getCategoryById(id);
         }
-        [HttpPost]
-        public IActionResult Create([FromBody] Product product)
+
+        public IActionResult Create([FromBody] Category newCategory)
         {
             //var id = _repository.getCount();
             //user.Id = id + 1;
@@ -36,22 +34,25 @@ namespace MyntraClone.Controllers
             {
                 //Guid obj = Guid.NewGuid();
                 // employee.Id = obj();
-                _repository.AddProduct(product);
-                return Ok(product);
+                _repository.AddCategory(newCategory);
+                return Ok(newCategory);
             }
             return BadRequest();
         }
 
-        // PUT api/<Employee1Controller>/5
+
+
+
+        //PUT api/<Employee1Controller>/5
 
 
 
         [HttpPut]
-        public IActionResult Edit([FromBody] Product product)
+        public IActionResult Edit([FromBody] Category category)
         {
         if (ModelState.IsValid)
         {
-        _repository.UpdateProduct(product);
+        _repository.UpdateCategory(category);
         return Ok();
         }
         return BadRequest();
@@ -64,7 +65,7 @@ namespace MyntraClone.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteConfirmed(int id)
         {
-        var data = _repository.getProductById(id);
+        var data = _repository.getCategoryById(id);
         if (data == null)
         {
         return NotFound();
@@ -72,7 +73,5 @@ namespace MyntraClone.Controllers
         _repository.delete(id);
         return Ok();
         }
-
-
-    }
+}
 }

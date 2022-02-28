@@ -21,5 +21,9 @@ namespace MyntraClone.Models
             context.SaveChanges();
 
         }
+        public User checkUserAvailable(User user1)
+        {
+            return context.Users.FirstOrDefault(user => user.Email == user1.Email && user.Password==user1.Password);
+        }
     }
 }

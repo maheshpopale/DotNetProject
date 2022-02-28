@@ -16,27 +16,30 @@ namespace MyntraClone.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-
+        UserRepository _repository = new UserRepository();
         [HttpPost, Route("login")]
         public IActionResult Login([FromBody] User user)
         {
-            if (user == null)
+
+            var user1 = _repository.checkUserAvailable(user);
+            if(user1==null)
                 return BadRequest("Invalid Client Request");
-            if (user.Email == "Mahesh" && user.Password == "Mahesh@123")
+            if (user1!= null)
             {
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
                 var tokenOptions = new JwtSecurityToken(
-                    issuer: "https://localhost:44312",
-                    audience: "https://localhost:44312",
+                    issuer: "https://localhost:44351",
+                    audience: "https://localhost:44351",
                     claims: new List<Claim>(),
                     expires: DateTime.Now.AddMinutes(5),
                     signingCredentials: signinCredentials
                     );
                 var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                return Ok(new { Token = tokenString });
+                return Ok(new { Token = tokenString,user1.Id});
             }
+                   
             return Unauthorized();
         }
     }

@@ -18,7 +18,28 @@ namespace MyntraClone.Controllers
             var orders = _ordersRepository.getOrders();
             return orders;
         }
+        [HttpGet("{id}")]
+        public IEnumerable<OrderMaster> getOrdersById(int id)
+        {
+            var orders = _ordersRepository.getOrdersById(id);
+            return orders;
+        }
 
+        [HttpPost,Route("order")]
+        public IActionResult Create ([FromBody] Order order)
+        {
+            Order order1 = new Order();
+            order1.OrderDate = new DateTime();
+            order1.UserId = order.UserId;
+            if (ModelState.IsValid)
+            {
+                //Guid obj = Guid.NewGuid();
+                // employee.Id = obj();
+                _ordersRepository.addOrder(order1);
+                return Ok(order);
+            }
+            return BadRequest();
+        }
         [HttpPost]
         public IActionResult Create([FromBody] OrderDetail order)
         {
@@ -32,6 +53,11 @@ namespace MyntraClone.Controllers
                 return Ok(order);
             }
             return BadRequest();
+        }
+        [HttpGet, Route("orderid")]
+        public Order getOrderId()
+        {
+            return _ordersRepository.getOrderId();
         }
     }
 }

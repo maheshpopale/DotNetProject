@@ -21,20 +21,27 @@ namespace MyntraClone.Controllers
         {
             return repository.getUser().ToList();
         }
-        [HttpPost]
+
+           [HttpPost] 
         public IActionResult Create([FromBody] User user)
         {
-            //var id = _repository.getCount();
-            //user.Id = id + 1;
-            if (ModelState.IsValid)
+            if (user == null)
             {
-                //Guid obj = Guid.NewGuid();
-                // employee.Id = obj();
-                repository.AddUser(user);
-                return Ok(user);
+                return BadRequest();
             }
-            return BadRequest();
+            else
+            {
+                context.Users.Add(user);
+                context.SaveChanges();
+                return Ok(new
+                {
+                    StatusCode = 200,
+                    Message = "Registeration succesfully"
+                });
+            }
         }
+
+
 
     }
 }

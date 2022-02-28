@@ -11,6 +11,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+
+
 
 namespace MyntraClone
 {
@@ -31,12 +34,12 @@ namespace MyntraClone
             {
                 options.AddPolicy("EnableCors", builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder.WithOrigins("http://localhost:4200")
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });
             });
-
+            services.AddControllers().AddNewtonsoftJson();
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
