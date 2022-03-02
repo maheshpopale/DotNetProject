@@ -1,4 +1,5 @@
-﻿using MyntraDbContext;
+﻿using MyntraClone.Helper;
+using MyntraDbContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,13 @@ namespace MyntraClone.Models
         }
         public User checkUserAvailable(User user1)
         {
-            return context.Users.FirstOrDefault(user => user.Email == user1.Email && user.Password==user1.Password);
+            return context.Users.FirstOrDefault(user => user.Email == user1.Email && EncDscPassword.DecryptPassword(user.Password) == user1.Password);
+        }
+        public void delete(int id)
+        {
+            var user = context.Users.FirstOrDefault(user => user.Id == id);
+            context.Users.Remove(user);
+            context.SaveChanges();
         }
     }
 }

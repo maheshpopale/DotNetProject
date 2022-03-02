@@ -18,7 +18,7 @@ namespace MyntraClone.Controllers
             var orders = _ordersRepository.getOrders();
             return orders;
         }
-        [HttpGet("{id}")]
+        [Route("userorders/{id:int}")]
         public IEnumerable<OrderMaster> getOrdersById(int id)
         {
             var orders = _ordersRepository.getOrdersById(id);
@@ -49,8 +49,8 @@ namespace MyntraClone.Controllers
             {
                 //Guid obj = Guid.NewGuid();
                 // employee.Id = obj();
-                _ordersRepository.AddOrderDetails(order);
-                return Ok(order);
+                var orders=_ordersRepository.AddOrderDetails(order);
+                return Ok(orders);
             }
             return BadRequest();
         }
@@ -59,5 +59,22 @@ namespace MyntraClone.Controllers
         {
             return _ordersRepository.getOrderId();
         }
+
+        //Update order for status change of user's order
+        [HttpGet("{id}")]
+        public IEnumerable<OrderDetail> updateOrderStatus(int id)
+        {
+           return _ordersRepository.UpdateOrder(id);
+         
+        }
+        //Delete Order
+
+        [HttpDelete("{id}")]
+        public IEnumerable<OrderDetail> DeleteConfirmed(int id)
+        {
+            return _ordersRepository.deleteOrder(id);
+            
+        }
+
     }
 }

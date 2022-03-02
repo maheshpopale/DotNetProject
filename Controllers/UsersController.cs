@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyntraClone.Helper;
 using MyntraClone.Models;
 using MyntraDbContext;
 using System;
@@ -13,24 +14,26 @@ namespace MyntraClone.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        UserRepository repository = new UserRepository();
+        UserRepository _repository = new UserRepository();
         dev_MyntradbContext context = new dev_MyntradbContext();
 
         [HttpGet]
         public IEnumerable<User> get()
         {
-            return repository.getUser().ToList();
+            return _repository.getUser().ToList();
         }
 
            [HttpPost] 
         public IActionResult Create([FromBody] User user)
         {
+
             if (user == null)
             {
                 return BadRequest();
             }
             else
             {
+                user.Password = EncDscPassword.EncryptPassword(user.Password);
                 context.Users.Add(user);
                 context.SaveChanges();
                 return Ok(new
@@ -39,6 +42,19 @@ namespace MyntraClone.Controllers
                     Message = "Registeration succesfully"
                 });
             }
+        }
+
+        //Delete User
+        [HttpDelete("{id}")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var data =_repository;
+            if (data == null)
+            {
+                return NotFound();
+            }
+            _repository.delete(id);
+            return Ok();
         }
 
 

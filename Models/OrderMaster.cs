@@ -21,6 +21,7 @@ namespace MyntraClone.Models
         public int productQuantity { get; set; }
         public decimal productPrice { get;set; }
         public string productSize { get; set; }
+        public string orderStatus { get; set; }
 
         public static explicit operator OrderMaster(List<object> v)
         {

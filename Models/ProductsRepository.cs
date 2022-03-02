@@ -37,5 +37,10 @@ namespace MyntraClone.Models
             context.Products.Remove(product);
             context.SaveChanges();
         }
+
+        internal Product getProductByCategory(int id)
+        {
+            return context.Products.FirstOrDefault(product => product.CategoryId== id);
+        }
     }
 }

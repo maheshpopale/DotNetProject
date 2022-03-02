@@ -1,4 +1,5 @@
-﻿using MyntraClone.Controllers;
+﻿using Microsoft.EntityFrameworkCore;
+using MyntraClone.Controllers;
 using MyntraDbContext;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,8 @@ namespace MyntraClone.Models
                                      paymentMode = od.PaymentMode,
                                      productQuantity = (int)od.ProductQuantity,
                                      productPrice = (decimal)od.ProductPrice,
-                                     productSize = od.Size
+                                     productSize = od.Size,
+                                     orderStatus=od.orderStatus
                                  }).ToList();
                 return allOrders;
             }
@@ -50,6 +52,34 @@ namespace MyntraClone.Models
                 throw new Exception(ex.Message);
             }
                             
+        }
+        //Update Order
+        public IEnumerable<OrderDetail> UpdateOrder(int id)
+        {
+            var orders=context.OrderDetails.ToList()
+                          .Where(x => x.OrderId==id);
+            foreach (var order in orders)
+            {
+                order.orderStatus = "Accepted";
+                context.Entry(order).State = EntityState.Modified;
+            }
+
+            context.SaveChanges();
+            return orders;
+
+        }
+
+        public  IEnumerable<OrderDetail> deleteOrder(int id)
+        {
+            var orders = context.OrderDetails.ToList()
+                         .Where(x => x.OrderId == id);
+            foreach(var order in orders)
+            {
+                context.OrderDetails.Remove(order);
+                context.SaveChanges();
+                
+            }
+            return orders;
         }
 
         //Adding an Order
@@ -60,10 +90,12 @@ namespace MyntraClone.Models
         }
 
         //Adding Order Details
-        public void AddOrderDetails(OrderDetail order)
+        public IEnumerable<OrderDetail> AddOrderDetails(OrderDetail order)
         {
-            context.OrderDetails.Add(order);
+            var orders=(IEnumerable<OrderDetail>)context.OrderDetails.Add(order);
             context.SaveChanges();
+            return orders;
+
 
         }
 
@@ -90,7 +122,8 @@ namespace MyntraClone.Models
                                   paymentMode = od.PaymentMode,
                                   productQuantity = (int)od.ProductQuantity,
                                   productPrice = (decimal)od.ProductPrice,
-                                  productSize = od.Size
+                                  productSize = od.Size,
+                                  orderStatus=od.orderStatus
                               }
                            ).ToList();
             return userOrders;
