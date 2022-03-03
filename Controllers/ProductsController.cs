@@ -52,14 +52,14 @@ namespace MyntraClone.Controllers
 
         //update an existing product details
         [HttpPut]
-        public IActionResult Edit([FromBody] Product product)
+        public IActionResult Edit([FromBody] Product productlist)
         {
-        if (ModelState.IsValid)
-        {
-        _repository.UpdateProduct(product);
-        return Ok();
-        }
-        return BadRequest();
+            if (ModelState.IsValid)
+            {
+                _repository.UpdateProductlist(productlist);
+                return Ok();
+            }
+            return BadRequest();
         }
 
         //Delete product

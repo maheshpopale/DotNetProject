@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyntraClone.Migrations
 {
     [DbContext(typeof(dev_MyntradbContext))]
-    [Migration("20220226070144_Initial Version")]
+    [Migration("20220302231637_InitialVersion")]
     partial class InitialVersion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

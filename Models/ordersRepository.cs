@@ -90,11 +90,10 @@ namespace MyntraClone.Models
         }
 
         //Adding Order Details
-        public IEnumerable<OrderDetail> AddOrderDetails(OrderDetail order)
+        public void AddOrderDetails(OrderDetail order)
         {
-            var orders=(IEnumerable<OrderDetail>)context.OrderDetails.Add(order);
+            context.OrderDetails.Add(order);
             context.SaveChanges();
-            return orders;
 
 
         }

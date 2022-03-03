@@ -26,9 +26,11 @@ namespace MyntraClone.Models
             context.SaveChanges();
 
         }
-        public void UpdateProduct(Product product)
+        public void UpdateProductlist(Product productlist)
         {
-            context.Entry<Product>(product).State =EntityState.Modified;
+            productlist.CreatedAt = DateTime.Now;
+            productlist.UpdatedAt = DateTime.Now;
+            context.Entry<Product>(productlist).State = EntityState.Modified;
             context.SaveChanges();
         }
         public void delete(int id)

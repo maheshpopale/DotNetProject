@@ -49,8 +49,8 @@ namespace MyntraClone.Controllers
             {
                 //Guid obj = Guid.NewGuid();
                 // employee.Id = obj();
-                var orders=_ordersRepository.AddOrderDetails(order);
-                return Ok(orders);
+                _ordersRepository.AddOrderDetails(order);
+                return Ok(order);
             }
             return BadRequest();
         }

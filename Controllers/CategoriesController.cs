@@ -21,7 +21,7 @@ namespace MyntraClone.Controllers
 
         //get Category by ID
         [HttpGet("{id}")]
-        public Category getProductById(int id)
+        public Category getCategoryById(int id)
         {
             return _repository.getCategoryById(id);
         }
@@ -40,13 +40,7 @@ namespace MyntraClone.Controllers
             return BadRequest();
         }
 
-
-
-
-        //PUT api/<Employee1Controller>/5
-
-
-
+          //Update Category
         [HttpPut]
         public IActionResult Edit([FromBody] Category category)
         {
@@ -61,7 +55,7 @@ namespace MyntraClone.Controllers
 
 
 
-        // DELETE api/<Employee1Controller>/5
+        // DELETE Category
         [HttpDelete("{id}")]
         public IActionResult DeleteConfirmed(int id)
         {
