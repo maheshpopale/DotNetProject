@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyntraClone.Migrations
 {
     [DbContext(typeof(dev_MyntradbContext))]
-    [Migration("20220302231637_InitialVersion")]
+    [Migration("20220309084645_Initial Version")]
     partial class InitialVersion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -253,7 +253,7 @@ namespace MyntraClone.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("createdAt");
 
@@ -280,7 +280,7 @@ namespace MyntraClone.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("productQuantity");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updatedAt");
 
@@ -354,6 +354,12 @@ namespace MyntraClone.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updatedAt");
+
+                    b.Property<string>("city")
+                        .HasColumnType("text");
+
+                    b.Property<string>("state")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

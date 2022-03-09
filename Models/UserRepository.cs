@@ -11,10 +11,17 @@ namespace MyntraClone.Models
     {
         dev_MyntradbContext context = new dev_MyntradbContext();
 
-        public IEnumerable<User> getUser()
+        //get all Users
+        public IEnumerable<User> getUsers()
         {
             var users = context.Users.ToList();
             return users;
+        }
+        //get user by ID
+        public User getUserDetails(int id)
+        {
+            return context.Users.FirstOrDefault(user => user.Id == id);
+
         }
         public void AddUser(User user)
         {

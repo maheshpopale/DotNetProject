@@ -65,6 +65,8 @@ namespace MyntraClone.Migrations
                     email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     mobile = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     address = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    city = table.Column<string>(type: "text", nullable: true),
+                    state = table.Column<string>(type: "text", nullable: true),
                     postalCode = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     password = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     createdAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -86,8 +88,8 @@ namespace MyntraClone.Migrations
                     productPrice = table.Column<decimal>(type: "numeric", nullable: true),
                     productDescription = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     image = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
-                    createdAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    createdAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    updatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CategoryId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>

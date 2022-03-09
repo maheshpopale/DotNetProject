@@ -21,9 +21,15 @@ namespace MyntraClone.Controllers
         [HttpGet]
         public IEnumerable<User> get()
         {
-            return _repository.getUser().ToList();
+            return _repository.getUsers().ToList();
         }
 
+        //get user by ID
+        [Route("user/{id:int}")]
+        public User get(int id)
+        {
+            return _repository.getUserDetails(id);
+        }
         //Add New User
         [HttpPost] 
         public IActionResult Create([FromBody] User user)
