@@ -17,13 +17,15 @@ namespace MyntraClone.Controllers
         UserRepository _repository = new UserRepository();
         dev_MyntradbContext context = new dev_MyntradbContext();
 
+        //get users
         [HttpGet]
         public IEnumerable<User> get()
         {
             return _repository.getUser().ToList();
         }
 
-           [HttpPost] 
+        //Add New User
+        [HttpPost] 
         public IActionResult Create([FromBody] User user)
         {
 

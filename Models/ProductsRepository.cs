@@ -22,6 +22,8 @@ namespace MyntraClone.Models
         }
         public void AddProduct(Product product)
         {
+            product.CreatedAt = DateTime.Now;
+            product.UpdatedAt = DateTime.Now;
             context.Products.Add(product);
             context.SaveChanges();
 
